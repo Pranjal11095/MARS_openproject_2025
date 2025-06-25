@@ -1,0 +1,16 @@
+{
+    "title": "Data Analysis Report 1. Introduction This report presents an in-depth analysis of the Body Shop data",
+    "keywords": [
+        "analysis",
+        "variables",
+        "values",
+        "numerical",
+        "dataset"
+    ],
+    "summary": "Data Analysis Report 1. Introduction This report presents an in-depth analysis of the Body Shop dataset. The objective was to perform data cleaning, exploratory data analysis (EDA), and identify relationships between variables. The findings aim to enhance understanding of the dataset and reveal patterns that could inform business strategies. 2. Data Cleaning Initial Inspection: \u2022 The dataset structure was examined using df.info() and df.describe(). \u2022 Date columns were converted to datetime format for proper handling. Handling Missing Values: \u2022 Missing values in numerical columns were imputed using the median. \u2022 Categorical columns with missing values were filled with \"Unknown.\" Duplicate...",
+    "language": "en",
+    "filename": "Data_Analysis_Report.pdf",
+    "word_count": 351,
+    "created_time": "Wed Jun 25 19:47:06 2025",
+    "file_type": "application/pdf"
+}

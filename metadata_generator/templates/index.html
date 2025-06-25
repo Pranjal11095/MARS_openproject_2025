@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lavender Metadata Generator</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='bg.avif') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', sans-serif;
+      color: #4a4a4a;
+    }
+
+    .container {
+      max-width: 700px;
+      margin-top: 60px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(192, 168, 210, 0.4);
+    }
+
+    h2 {
+      color: #7b4d9f;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background-color: #9b7bb8;
+      border-color: #9b7bb8;
+    }
+
+    .btn-primary:hover {
+      background-color: #7b4d9f;
+      border-color: #7b4d9f;
+    }
+
+    .btn-success {
+      background-color: #8ec3b0;
+      border-color: #8ec3b0;
+    }
+
+    .btn-success:hover {
+      background-color: #70a499;
+      border-color: #70a499;
+    }
+
+    #output {
+      background-color: #fdfaff;
+      border: 1px solid #ded0e7;
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="text-center mb-4">Automated Metadata Generator</h2>
+
+    <form id="upload-form" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="file" class="form-label">Choose a file (PDF, DOCX, TXT, PNG, JPG)</label>
+        <input class="form-control" type="file" id="file" name="file" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Generate Metadata</button>
+    </form>
+
+    <div id="result" class="mt-4" style="display: none;">
+      <h5>Metadata Output</h5>
+      <pre id="output"></pre>
+      <a id="download-link" class="btn btn-success mt-3 d-none" href="#" download>Download Metadata JSON</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("upload-form");
+    const output = document.getElementById("output");
+    const result = document.getElementById("result");
+    const downloadLink = document.getElementById("download-link");
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      output.textContent = "Processing...";
+      result.style.display = "block";
+
+      const res = await fetch("/", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 4);
+
+      const safeFilename = encodeURIComponent(data.filename);
+      downloadLink.href = `/download/${safeFilename}`;
+      downloadLink.classList.remove("d-none");
+    };
+  </script>
+
+</body>
+</html>
