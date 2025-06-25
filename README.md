@@ -56,7 +56,7 @@ metadata_generator/
 
 ├── TheoryOfComputation.pdf                     ← Sample input document
 
-└── demo.mp4                                     ← Demo walkthrough
+
 
 ##  How to Run (Google Colab )
 
